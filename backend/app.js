@@ -1,7 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config()
+
 const stuffRoutes = require('./routes/stuff');
+const userRoutes = require('./routes/user')
+
 mongoose.connect(process.env.MONGO_URI,
     { useNewUrlParser: true,
         useUnifiedTopology: true })
@@ -19,5 +22,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/stuff', stuffRoutes)
+app.use('/api/auth', userRoutes)
 
 module.exports = app;
