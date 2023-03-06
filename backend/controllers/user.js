@@ -1,12 +1,12 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
- User = require('../models/user')
+const User = require('../models/user')
 
 
 exports.signup = (req, res, next) => {
  bcrypt.hash(req.body.password, 10)
      .then(hash => {
-      const user = new User({
+      const user = new User ({
        email: req.body.email,
        password: hash
       });
@@ -21,7 +21,7 @@ exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then(user => {
             if (!user) {
-                return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+                return res.status(401).json({ error: 'Utilisateur introuvable !' });
             }
             bcrypt.compare(req.body.password, user.password)
                 .then(valid => {
@@ -29,9 +29,9 @@ exports.login = (req, res, next) => {
                         return res.status(401).json({ error: 'Mot de passe incorrect !' });
                     }
                     res.status(200).json({
-                        userId: user._id,
+                        userId: userId,
                         token: jwt.sign(
-                            { userId: user._id },
+                            { userId: userId },
                             'RANDOM_TOKEN_SECRET',
                             { expiresIn: '24h' }
                         )

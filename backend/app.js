@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv').config()
 const path = require('path');
 
-const stuffRoutes = require('./routes/Stuff');
+const stuffRoutes = require('./routes/Sauce');
 const userRoutes = require('./routes/User')
 
 mongoose.connect(process.env.MONGO_URI,
@@ -23,7 +23,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api/stuff', stuffRoutes)
+app.use('/api/sauces', stuffRoutes)
 app.use('/api/auth', userRoutes)
 
 module.exports = app;
