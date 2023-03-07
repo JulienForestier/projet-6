@@ -1,4 +1,4 @@
-const ModelSauce = require('../models/sauce')
+const ModelSauce = require('../models/Sauce')
 const fs = require('fs')
 
 
