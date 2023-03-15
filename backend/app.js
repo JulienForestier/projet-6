@@ -3,12 +3,14 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv').config()
 const path = require('path');
 
-const stuffRoutes = require('./routes/Sauce');
+const sauceRoutes = require('./routes/Sauce');
 const userRoutes = require('./routes/User')
 
 mongoose.connect(process.env.MONGO_URI,
-    { useNewUrlParser: true,
-        useUnifiedTopology: true })
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
@@ -24,7 +26,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api/sauces', stuffRoutes)
+app.use('/api/sauces', sauceRoutes)
 app.use('/api/auth', userRoutes)
 
 module.exports = app;
