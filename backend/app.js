@@ -5,6 +5,7 @@ const path = require('path');
 
 const sauceRoutes = require('./routes/Sauce');
 const userRoutes = require('./routes/User')
+const helmet = require("helmet");
 
 mongoose.connect(process.env.MONGO_URI,
     {
@@ -26,7 +27,8 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api/sauces', sauceRoutes)
-app.use('/api/auth', userRoutes)
+app.use(helmet());
+app.use('/api/sauces', sauceRoutes );
+app.use('/api/auth', userRoutes );
 
 module.exports = app;
