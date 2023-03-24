@@ -1,12 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv').config()
+require('dotenv').config();
 const path = require('path');
 
 const sauceRoutes = require('./routes/Sauce');
 const userRoutes = require('./routes/User')
 const helmet = require("helmet");
 
+//connexion a mongoDB
 mongoose.connect(process.env.MONGO_URI,
     {
         useNewUrlParser: true,

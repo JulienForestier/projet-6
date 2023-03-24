@@ -1,4 +1,5 @@
 const passwordValidation = require('password-validator');
+const {json} = require("express");
 
 const schema = new passwordValidation()
 
@@ -12,6 +13,6 @@ module.exports = (req, res, next) => {
     if (schema.validate(req.body.password) === true) {
         next()
     } else {
-        alert(`le mot de passe n'est pas valide`)
+        res.status(400).json({message: `le mot de passe n'est pas valide`})
     }
 }
